@@ -1,24 +1,34 @@
 import clsx from "clsx";
+import { createMemo } from "solid-js";
 
-export function UserAvatar(props) {
-    const [a, b, c] = props.userHandle?.split("-").map(word => word[0]) ?? ['x', 'x', 'x'];
-    const color = randomColor();
+type UserAvatarProps = {
+    userHandle: string,
+    class?: string
+    isMe: boolean,
+    onClick?: Function,
+}
+
+export function UserAvatar(props: UserAvatarProps) {
+    const initials = createMemo(() => props.userHandle.split("-").map(word => word[0]));
+    const color = getUserColor(props.userHandle);
 
     return (
         <div
             class={clsx(
                 "w-10 h-10 rounded-full shadow-md flex flex-col text-center font-bold",
-                "justify-center uppercase pt-1 leading-none items-center border-2",
+                "justify-center uppercase leading-none items-center pt-0.5 border-2",
                 props.isMe ? "border-purple-500" : color,
+                props.class,
             )}
+            onClick={(e) => props.onClick ? props.onClick(e) : (() => {})}
         >
-            {`${a}${b}`}<br/>
-            {c}
+            {`${initials()[0]}${initials()[1]}`}<br/>
+            {initials()[2]}
         </div>
     );
 }
 
-const randomColor = (): string => {
+const getUserColor = (id: string): string => {
     const colors = [
         "border-red-500",
         "border-orange-500",
@@ -37,6 +47,16 @@ const randomColor = (): string => {
         "border-pink-500",
         "border-rose-500",
     ];
-    const index = Math.floor(Math.random() * colors.length);
+    const index = hash(id) % colors.length;
     return colors[index];
+}
+
+function hash(str: string) {
+    let hash = 0;
+    for (let i = 0, len = str.length; i < len; i++) {
+        let chr = str.charCodeAt(i);
+        hash = (hash << 5) - hash + chr;
+        hash |= 0;
+    }
+    return hash;
 }

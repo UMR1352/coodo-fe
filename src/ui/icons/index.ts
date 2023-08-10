@@ -5,3 +5,5 @@ export * from "./SunIcon";
 export * from "./HandShakeIcon";
 export * from "./ListTodoIcon";
 export * from "./CheckIcon";
+export * from "./PencilIcon";
+export * from "./CopyIcon";

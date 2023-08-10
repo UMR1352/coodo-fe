@@ -4,6 +4,7 @@ export const get = async (path: string) => {
     return fetch(url, {
         method: "GET",
         credentials: "include",
+        cache: "no-store"
     });
 }
 
@@ -14,5 +15,6 @@ export const post = async (path: string, body?: any) => {
         method: "POST",
         credentials: "include",
         body: body ?? {},
+        cache: "no-store"
     });
 }

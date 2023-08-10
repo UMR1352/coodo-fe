@@ -10,7 +10,7 @@ const TaskValidator = z.object({
     id: z.string().uuid(),
     name: z.string(),
     done: z.coerce.boolean(),
-    assignee: z.string().uuid(),
+    assignee: SessionValidator,
 });
 
 export type Task = z.infer<typeof TaskValidator>;

@@ -10,10 +10,14 @@ type ThemeContext = {
 export const ThemeContext = createContext<ThemeContext>();
 
 export function useThemeContext(): ThemeContext {
-    return useContext(ThemeContext);
+    const ctx = useContext(ThemeContext);
+    if (ctx == undefined) {
+        throw new Error("`useThemeContext` can only be called inside a ThemeContextProvider");
+    }
+    return ctx;
 }
 
-export function ThemeContextProvider(props) {
+export function ThemeContextProvider(props: {children: any}) {
     const [theme, setTheme] = createSignal<Theme>('light');
     const toggleTheme = () => {
         if (theme() === 'light') setTheme('dark');
