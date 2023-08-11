@@ -23,6 +23,8 @@ export default defineConfig({
         target: "ws://127.0.0.1:8080",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/ws/, "/todos"),
+        secure: false,
+        ws: true,
       }
     }
   },

@@ -54,7 +54,7 @@ export function TodoPage() {
                             onClick={copyToClipboard}
                         />
                         <Show when={copied()}>
-                            <Card class="absolute right-0 -bottom-16 text-center w-32 z-20">
+                            <Card class="absolute right-0 -bottom-10 text-center w-56 z-20 opacity-75">
                                 TodoList's link copied!
                             </Card>
                         </Show>

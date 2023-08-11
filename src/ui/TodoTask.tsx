@@ -53,7 +53,7 @@ export function TodoTask(props: TodoTaskProps) {
             </div>
             <div
                 class="relative flex items-center space-x-2 cursor-pointer"
-                onClick={e => { console.log("open drop " + isDropdownActive()); setIsDropDownActive(!isDropdownActive()); e.preventDefault();} }
+                onClick={e => setIsDropDownActive(!isDropdownActive()) }
             >
                 <UserAvatar
                     userHandle={assignee().handle}
@@ -87,7 +87,7 @@ function AssigneeDropDown(props: AssigneeDropDownProps) {
     const { theme } = useThemeContext();
     const { session } = useSessionContext();
     let ref: HTMLDivElement| undefined;
-    const onClickOutside = e => {!ref?.contains(e.target) && props.onClose(); console.log("on close")};
+    const onClickOutside = e => {!ref?.contains(e.target) && props.onClose()};
 
     createEffect(() => {
         if (props.active) {
