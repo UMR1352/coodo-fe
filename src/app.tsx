@@ -1,5 +1,5 @@
 import { createResource, type Component, Switch, Match } from 'solid-js';
-import { Router, Routes, Route, Outlet, Navigate } from '@solidjs/router';
+import { Router, Routes, Route, Outlet, Navigate, hashIntegration } from '@solidjs/router';
 
 import { SessionProvider } from './contexts/session';
 import Home from './pages/home';
@@ -14,7 +14,7 @@ const App: Component = () => {
   return (
     <SessionProvider>
       <ThemeContextProvider>
-        <Router>
+        <Router source={hashIntegration()}>
           <Layout>
             <Routes>
               <Route path="/" component={Home} />
